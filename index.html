@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@lauuink — Mini tattoos per a esdeveniments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brown-dark:#3a2415;
+    --brown:#6b4226;
+    --brown-mid:#8a6a4a;
+    --gold:#b89b74;
+    --cream:#f4efe7;
+    --cream-2:#e7e0d3;
+    --ink:#2a2118;
+    --white:#fffdf9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Poppins', sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+    font-weight:300;
+  }
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+  .serif-label{
+    font-family:'Cormorant Garamond', serif;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brown);
+    font-weight:600;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .btn{
+    display:inline-block;
+    padding:14px 34px;
+    background:var(--brown);
+    color:var(--white);
+    border-radius:2px;
+    font-size:14px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    transition:background .25s ease, transform .25s ease;
+    border:1px solid var(--brown);
+  }
+  .btn:hover{background:var(--brown-dark); transform:translateY(-1px);}
+  .btn.outline{
+    background:transparent;
+    color:var(--white);
+    border:1px solid var(--white);
+  }
+  .btn.outline:hover{background:rgba(255,255,255,0.12);}
+
+  /* NAV */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 40px;
+    mix-blend-mode:normal;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  }
+  header .brand{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--white);
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  header .brand span{color:var(--gold);}
+  header nav a{
+    color:var(--white);
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-left:28px;
+  }
+  header nav{display:none;}
+  @media(min-width:820px){ header nav{display:block;} }
+  .lang-toggle{
+    margin-left:28px;
+    display:inline-block;
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.6);
+    color:var(--white);
+    font-family:'Poppins', sans-serif;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:6px 13px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:background .2s ease, opacity .2s ease;
+  }
+  .lang-toggle:hover{background:rgba(255,255,255,0.15);}
+  .lang-toggle span{margin-right:4px;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:60% 40%;
+    filter:grayscale(15%);
+  }
+  .hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,14,10,0.55) 0%, rgba(20,14,10,0.35) 40%, rgba(20,14,10,0.75) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    color:var(--white);
+    padding:0 24px;
+  }
+  .hero-content .eyebrow{
+    font-size:12px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--cream-2);
+    margin-bottom:18px;
+  }
+  .hero-content h1{
+    font-size:clamp(42px, 8vw, 88px);
+    line-height:1;
+    color:var(--white);
+  }
+  .hero-content h1 span{color:var(--gold);}
+  .hero-content .subtitle{
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(22px, 3vw, 30px);
+    margin-top:6px;
+    color:var(--cream);
+  }
+  .hero-content p.tag{
+    margin-top:26px;
+    font-size:15px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--cream-2);
+  }
+  .hero-content .cta-row{
+    margin-top:38px;
+    display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
+  }
+  .scroll-hint{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+    color:var(--cream-2); font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    z-index:2;
+  }
+
+  /* SECTION helpers */
+  section{padding:100px 0;}
+  .section-head{max-width:640px; margin-bottom:50px;}
+  .section-head .serif-label{font-size:14px; margin-bottom:12px; display:block;}
+  .section-head h2{font-size:clamp(28px,4vw,42px); color:var(--brown-dark);}
+  .section-head p{margin-top:14px; font-size:16px; color:#5a4d3f;}
+
+  /* INTRO / QUE ES */
+  .intro{background:var(--white);}
+  .intro-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:50px;
+    align-items:center;
+  }
+  @media(min-width:900px){ .intro-grid{grid-template-columns:1fr 1fr;} }
+  .intro-photo{position:relative;}
+  .intro-photo img{
+    width:100%; height:520px; object-fit:cover;
+    border-radius:2px;
+  }
+  .intro-photo .tag-chip{
+    position:absolute; bottom:-22px; left:24px;
+    background:var(--brown); color:var(--white);
+    padding:14px 22px; font-family:'Cormorant Garamond', serif;
+    font-size:15px; letter-spacing:0.05em;
+    box-shadow:0 10px 30px rgba(58,36,21,0.25);
+  }
+  .intro-text h3{font-size:26px; color:var(--brown-dark); margin-bottom:14px;}
+  .intro-text p{color:#5a4d3f; margin-bottom:28px; font-size:16px;}
+  .feature-box{
+    background:var(--cream-2);
+    padding:28px 30px;
+    border-left:3px solid var(--brown);
+    margin-bottom:30px;
+  }
+  .feature-box h4{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--brown-dark);
+    font-size:19px;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  .feature-box p{color:#5a4d3f; font-size:15px; margin:0;}
+  ul.check-list{list-style:none;}
+  ul.check-list li{
+    position:relative;
+    padding-left:24px;
+    margin-bottom:12px;
+    font-size:15.5px;
+    color:#4a3f33;
+  }
+  ul.check-list li::before{
+    content:'';
+    position:absolute; left:0; top:9px;
+    width:7px; height:7px;
+    background:var(--gold);
+    border-radius:50%;
+  }
+
+  /* PROCES */
+  .proces{background:var(--cream);}
+  .proces-tabs-label{
+    display:flex; gap:10px; margin-bottom:36px; flex-wrap:wrap;
+  }
+  .proces-tabs-label span{
+    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    padding:6px 14px; border:1px solid var(--brown-mid); color:var(--brown);
+    border-radius:20px;
+  }
+  .steps-row{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+  }
+  @media(min-width:760px){ .steps-row{grid-template-columns:repeat(5,1fr);} }
+  .step-card{
+    text-align:center;
+    padding:10px;
+  }
+  .step-img{
+    width:100%;
+    height:96px;
+    background:transparent;
+    border:none;
+    border-radius:2px;
+    margin-bottom:18px;
+    overflow:hidden;
+  }
+  .step-img img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .step-num{
+    width:46px;height:46px;border-radius:50%;
+    background:var(--brown);
+    color:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    margin:0 auto 16px;
+  }
+  .step-card h4{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    color:var(--brown-dark);
+    margin-bottom:6px;
+  }
+  .step-card p{font-size:13.5px; color:#6b5f50;}
+
+  .proces-block{margin-bottom:0;}
+  .proces-block-head{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:36px;
+  }
+  .proces-block-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:15px;
+    letter-spacing:0.1em;
+    color:var(--gold);
+    border:1px solid var(--brown-mid);
+    border-radius:20px;
+    padding:5px 12px;
+    white-space:nowrap;
+    margin-top:4px;
+  }
+  .proces-block-head h3{
+    font-size:24px;
+    color:var(--brown-dark);
+    margin-bottom:4px;
+  }
+  .proces-block-head p{
+    font-size:14.5px;
+    color:#6b5f50;
+  }
+  .proces-divider{
+    height:1px;
+    background:var(--brown-mid);
+    opacity:0.3;
+    margin:64px 0 56px;
+  }
+  .organiser-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  @media(min-width:760px){ .organiser-row{grid-template-columns:repeat(3,1fr);} }
+  .org-card{
+    background:var(--cream-2);
+    padding:44px 30px 34px;
+    text-align:center;
+    position:relative;
+  }
+  .org-card .big-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:54px;
+    color:var(--brown);
+    display:block;
+    margin-bottom:14px;
+  }
+  .org-card p{font-size:15px; color:#5a4d3f;}
+  .org-card p.small{font-size:13px; color:#8a7c69; margin-top:10px;}
+
+  /* GALLERY / MOMENTS */
+  .gallery{background:var(--white);}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  @media(min-width:640px){ .gallery-grid{grid-template-columns:repeat(6,1fr);} }
+  .gallery-grid .sq{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    overflow:hidden;
+    border-radius:2px;
+    background:var(--cream-2);
+  }
+  .gallery-grid .sq img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .gallery-quote{
+    text-align:center;
+    margin-top:0;
+  }
+  .gallery-quote p{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--brown-dark);
+  }
+
+  /* INCLOU */
+  .inclou{background:var(--brown-dark); color:var(--cream);}
+  .inclou .section-head h2{color:var(--white);}
+  .inclou .section-head p{color:var(--cream-2);}
+  .inclou .section-head .serif-label{color:var(--gold);}
+  .inclou-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px 40px;
+  }
+  @media(min-width:760px){ .inclou-grid{grid-template-columns:1fr 1fr;} }
+  .inclou-grid .item{
+    display:flex; gap:14px; align-items:flex-start;
+    padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .inclou-grid .item .mark{
+    color:var(--gold); font-size:18px; line-height:1.4;
+  }
+  .inclou-grid .item p{font-size:15px; color:var(--cream-2); margin:0;}
+  .inclou-note{
+    margin-top:36px;
+    font-size:13.5px;
+    color:#c9bda8;
+    font-style:italic;
+  }
+
+  /* CTA FINAL */
+  .cta-final{
+    background:var(--brown);
+    color:var(--white);
+    position:relative;
+    overflow:hidden;
+    padding:110px 0;
+  }
+  .cta-final .icon-deco{
+    position:absolute;
+    right:-40px; top:50%; transform:translateY(-50%);
+    width:340px; opacity:0.9;
+  }
+  @media(max-width:820px){ .cta-final .icon-deco{display:none;} }
+  .cta-final-inner{max-width:560px;}
+  .cta-final .serif-label{color:var(--gold);}
+  .cta-final h2{
+    font-size:clamp(30px,4.5vw,48px);
+    margin:14px 0 20px;
+    color:var(--white);
+  }
+  .cta-final p{color:#e7dcc9; font-size:16px; margin-bottom:34px;}
+  .cta-final p.cta-email{
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    color:var(--gold);
+    margin-top:-14px;
+    margin-bottom:26px;
+    letter-spacing:0.02em;
+  }
+  .cta-final .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .cta-final .btn.solid{
+    background:var(--white); color:var(--brown-dark); border-color:var(--white);
+  }
+  .cta-final .btn.solid:hover{background:var(--cream);}
+
+  footer{
+    background:var(--brown-dark);
+    color:#bdaa93;
+    text-align:center;
+    padding:34px 20px;
+    font-size:13px;
+    letter-spacing:0.05em;
+  }
+  footer .brand{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    color:var(--white);
+    display:block;
+    margin-bottom:8px;
+  }
+  footer .footer-email{
+    display:block;
+    margin-top:10px;
+    color:#e7dcc9;
+    letter-spacing:0.03em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">@lauu<span>ink</span></div>
+  <div style="display:flex; align-items:center;">
+    <nav>
+      <a href="#que-es" data-ca="Què és" data-en="About">Què és</a>
+      <a href="#proces" data-ca="El procés" data-en="Process">El procés</a>
+      <a href="#moments" data-ca="Moments" data-en="Gallery">Moments</a>
+      <a href="#inclou" data-ca="Què inclou" data-en="What's included">Què inclou</a>
+      <a href="#contacte" data-ca="Contacte" data-en="Contact">Contacte</a>
+    </nav>
+    <button type="button" id="langToggle" class="lang-toggle" aria-label="Switch to English"><span id="langFlag" aria-hidden="true">🇬🇧</span> EN</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="images/hero-esdeveniment.jpg" data-ca="Tatuadora fent un mini tattoo durant un esdeveniment" data-en="Tattoo artist doing a mini tattoo during an event" alt="Tatuadora fent un mini tattoo durant un esdeveniment">
+  <div class="hero-content">
+    <div class="eyebrow">@lauuink</div>
+    <h1>Mini <span>tattoos</span></h1>
+    <div class="subtitle" data-ca="per a esdeveniments" data-en="for events">per a esdeveniments</div>
+    <p class="tag" data-ca="Un record permanent dels teus convidats" data-en="A permanent memory for your guests">Un record permanent dels teus convidats</p>
+    <div class="cta-row">
+      <a href="#contacte" class="btn" data-ca="Reserva la teva data" data-en="Book your date">Reserva la teva data</a>
+      <a href="#proces" class="btn outline" data-ca="Com funciona" data-en="How it works">Com funciona</a>
+    </div>
+  </div>
+  <div class="scroll-hint" data-ca="desplaça't ↓" data-en="scroll ↓">desplaça't ↓</div>
+</section>
+
+<!-- QUE ES -->
+<section class="intro" id="que-es">
+  <div class="wrap intro-grid">
+    <div class="intro-photo">
+      <img src="images/estudi-tatuatge.jpg" data-ca="Lauuink tatuant en directe durant una sessió" data-en="Lauuink tattooing live during a session" alt="Lauuink tatuant en directe durant una sessió">
+      <div class="tag-chip">@lauuink</div>
+    </div>
+    <div class="intro-text">
+      <span class="serif-label" data-ca="En què consisteix" data-en="What it is">En què consisteix</span>
+      <h3 style="margin-top:10px;" data-ca="Un espai de tatuatges, fet a mida del teu esdeveniment" data-en="A tattoo space, tailored to your event">Un espai de tatuatges, fet a mida del teu esdeveniment</h3>
+      <p data-ca="Oferim un espai de tatuatges durant el teu esdeveniment on els convidats poden escollir un mini disseny i endur-se un record únic del gran dia." data-en="We offer a tattoo space during your event where guests can choose a mini design and take home a unique memory of the big day.">Oferim un espai de tatuatges durant el teu esdeveniment on els convidats poden escollir un mini disseny i endur-se un record únic del gran dia.</p>
+
+      <div class="feature-box">
+        <h4 data-ca="Com funciona?" data-en="How does it work?">Com funciona?</h4>
+        <ul class="check-list">
+          <li data-ca="Catàleg de mini tattoos exclusius — es poden personalitzar amb els tatuatges que vulgueu." data-en="Exclusive catalogue of mini tattoos — can be customised with any designs you like.">Catàleg de mini tattoos exclusius — es poden personalitzar amb els tatuatges que vulgueu.</li>
+          <li data-ca="Tatuatges en negre i en vermell (es pot consultar si es vol algun altre color)." data-en="Tattoos in black and red (ask us if you'd like another colour).">Tatuatges en negre i en vermell (es pot consultar si es vol algun altre color).</li>
+          <li data-ca="Assistent durant tota la sessió." data-en="An assistant throughout the whole session.">Assistent durant tota la sessió.</li>
+          <li data-ca="Material estèril d'un sol ús." data-en="Single-use sterile material.">Material estèril d'un sol ús.</li>
+          <li data-ca="Zona preparada amb totes les mesures higièniques." data-en="A space set up with full hygiene standards.">Zona preparada amb totes les mesures higièniques.</li>
+          <li data-ca="Cura posterior explicada a cada convidat." data-en="Aftercare explained to every guest.">Cura posterior explicada a cada convidat.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCES -->
+<section class="proces" id="proces">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="serif-label" data-ca="El procés" data-en="The process">El procés</span>
+      <h2 data-ca="Com funciona, pas a pas" data-en="How it works, step by step">Com funciona, pas a pas</h2>
+    </div>
+
+    <div class="proces-block">
+      <div class="proces-block-head">
+        <span class="proces-block-num">01</span>
+        <div>
+          <h3 data-ca="Pels convidats" data-en="For guests">Pels convidats</h3>
+        </div>
+      </div>
+      <div class="steps-row">
+        <div class="step-card">
+          <div class="step-img"><img src="images/pas1.png" alt="pas1"></div>
+          <div class="step-num">1</div>
+          <h4 data-ca="Escull un disseny" data-en="Choose a design">Escull un disseny</h4>
+        </div>
+        <div class="step-card">
+          <div class="step-img"><img src="images/pas2.png" alt="pas2"></div>
+          <div class="step-num">2</div>
+          <h4 data-ca="Signa el consentiment" data-en="Sign the consent form">Signa el consentiment</h4>
+        </div>
+        <div class="step-card">
+          <div class="step-img"><img src="images/pas3.png" alt="pas3"></div>
+          <div class="step-num">3</div>
+          <h4 data-ca="Preparem l'stencil" data-en="We prepare the stencil">Preparem l'stencil</h4>
+        </div>
+        <div class="step-card">
+          <div class="step-img"><img src="images/pas4.png" alt="pas4"></div>
+          <div class="step-num">4</div>
+          <h4 data-ca="Fem el tatuatge" data-en="We do the tattoo">Fem el tatuatge</h4>
+        </div>
+        <div class="step-card">
+          <div class="step-img"><img src="images/pas5.png" alt="pas5"></div>
+          <div class="step-num">5</div>
+          <h4 data-ca="T'expliquem la cura" data-en="We explain the aftercare">T'expliquem la cura</h4>
+          <p data-ca="Inclou un segon repàs si cal, un cop cicatritzat." data-en="Includes a touch-up if needed once healed.">Inclou un segon repàs si cal, un cop cicatritzat.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="proces-divider"></div>
+
+    <div class="proces-block">
+      <div class="proces-block-head">
+        <span class="proces-block-num">02</span>
+        <div>
+          <h3 data-ca="Per a qui organitza la sessió" data-en="For whoever is organising the session">Per a qui organitza la sessió</h3>
+        </div>
+      </div>
+      <div class="organiser-row">
+        <div class="org-card">
+          <span class="big-num">1</span>
+          <p data-ca="Escollir la durada de la sessió." data-en="Choose the length of the session.">Escollir la durada de la sessió.</p>
+          <p class="small" data-ca="Si durant l'esdeveniment és necessari, sempre hi haurà la possibilitat d'allargar-la 1 hora més." data-en="If needed during the event, there's always the option to extend it by 1 more hour.">Si durant l'esdeveniment és necessari, sempre hi haurà la possibilitat d'allargar-la 1 hora més.</p>
+        </div>
+        <div class="org-card">
+          <span class="big-num">2</span>
+          <p data-ca="Revisar amb la tatuadora l'espai, la logística i les necessitats." data-en="Review the space, logistics and needs with the tattoo artist.">Revisar amb la tatuadora l'espai, la logística i les necessitats.</p>
+          <p class="small" data-ca="Per garantir que la sessió es pugui dur a terme en les millors condicions." data-en="To make sure the session runs in the best possible conditions.">Per garantir que la sessió es pugui dur a terme en les millors condicions.</p>
+        </div>
+        <div class="org-card">
+          <span class="big-num">3</span>
+          <p data-ca="Decidir si es volen incloure tatuatges personalitzats." data-en="Decide whether to include custom tattoos.">Decidir si es volen incloure tatuatges personalitzats.</p>
+          <p class="small" data-ca="Han de ser dissenys molt petits i senzills, per poder tatuar el màxim nombre de persones durant la sessió." data-en="They need to be very small, simple designs, so as many people as possible can be tattooed during the session.">Han de ser dissenys molt petits i senzills, per poder tatuar el màxim nombre de persones durant la sessió.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOMENTS / GALLERY -->
+<section class="gallery" id="moments">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="serif-label" data-ca="Moments reals" data-en="Real moments">Moments reals</span>
+      <h2 data-ca="Un record permanent perquè els teus convidats s'enduguin una experiència única." data-en="A permanent memory for your guests to take home a unique experience.">Un record permanent perquè els teus convidats s'enduguin una experiència única.</h2>
+    </div>
+    <div class="gallery-grid">
+		<div class="sq"><img src="images/esdeveniment-1.jpg" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+		<div class="sq"><img src="images/esdeveniment-2.jpg" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/flor.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/psicopato.png" data-ca="Mini tattoo psicopato" data-en="Mini tattoo psicopato" alt="Mini tattoo psicopato"></div>
+      <div class="sq"><img src="images/cor.png" data-ca="Mini tattoo cor" data-en="Mini tattoo heart" alt="Mini tattoo cor"></div>
+      <div class="sq"><img src="images/sushi.png" data-ca="Mini tattoo sushi" data-en="Mini tattoo sushi" alt="Mini tattoo sushi"></div>
+      <div class="sq"><img src="images/ampolla.png" data-ca="Mini tattoo ampolla" data-en="Mini tattoo bottle" alt="Mini tattoo ampolla"></div>
+      <div class="sq"><img src="images/canell.png" data-ca="Mini tattoo canell" data-en="Mini tattoo wrist" alt="Mini tattoo canell"></div>
+      <div class="sq"><img src="images/amapola.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/far.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+		<div class="sq"><img src="images/cranc.png" data-ca="Mini tattoo ampolla" data-en="Mini tattoo bottle" alt="Mini tattoo ampolla"></div>
+      <div class="sq"><img src="images/maduixeta.png" data-ca="Mini tattoo canell" data-en="Mini tattoo wrist" alt="Mini tattoo canell"></div>
+      <div class="sq"><img src="images/flor bcn.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/floreta.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+		<div class="sq"><img src="images/onada.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+		<div class="sq"><img src="images/ART.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+		<div class="sq"><img src="images/sparkle.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+		<div class="sq"><img src="images/arc.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUE INCLOU -->
+<section class="inclou" id="inclou">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="serif-label" data-ca="Què inclou" data-en="What's included">Què inclou</span>
+      <h2 data-ca="Tot pensat, tot resolt" data-en="Everything planned, everything sorted">Tot pensat, tot resolt</h2>
+      <p data-ca="Ens encarreguem de cada detall perquè només us hàgiu de preocupar de gaudir de l'esdeveniment." data-en="We take care of every detail so all you have to do is enjoy the event.">Ens encarreguem de cada detall perquè només us hàgiu de preocupar de gaudir de l'esdeveniment.</p>
+    </div>
+    <div class="inclou-grid">
+      <div class="item"><span class="mark">✦</span><p data-ca="Tatuadora professional durant tota la sessió." data-en="A professional tattoo artist throughout the session.">Tatuadora professional durant tota la sessió.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Assistent per gestionar els consentiments, els stencils i l'organització de la cua." data-en="An assistant to manage consent forms, stencils and queue organisation.">Assistent per gestionar els consentiments, els stencils i l'organització de la cua.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Tot el material necessari per realitzar els tatuatges." data-en="All the material needed to do the tattoos.">Tot el material necessari per realitzar els tatuatges.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Material estèril i d'un sol ús." data-en="Sterile, single-use material.">Material estèril i d'un sol ús.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Muntatge i desmuntatge de l'espai de treball." data-en="Set-up and take-down of the work space.">Muntatge i desmuntatge de l'espai de treball.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Catàleg de mini tattoos per escollir." data-en="A catalogue of mini tattoos to choose from.">Catàleg de mini tattoos per escollir.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Possibilitat d'incloure alguns dissenys personalitzats (prèvia aprovació)." data-en="The option to include some custom designs (subject to prior approval).">Possibilitat d'incloure alguns dissenys personalitzats (prèvia aprovació).</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Segon repàs inclòs si és necessari un cop cicatritzat el tatuatge." data-en="A follow-up touch-up included if needed once the tattoo has healed.">Segon repàs inclòs si és necessari un cop cicatritzat el tatuatge.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Assessorament previ per planificar l'espai i el funcionament del servei." data-en="Prior guidance to plan the space and how the service will run.">Assessorament previ per planificar l'espai i el funcionament del servei.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="contacte">
+  <img class="icon-deco" src="images/icona-ma-tatuatge.png" alt="">
+  <div class="wrap">
+    <div class="cta-final-inner">
+      <span class="serif-label">@lauuink</span>
+      <h2 data-ca="Fem que el teu dia es recordi per sempre" data-en="Let's make your day unforgettable">Fem que el teu dia es recordi per sempre</h2>
+      <p data-ca="Explica'ns quan i on és el teu esdeveniment i preparem junts l'experiència de tatuatges pels teus convidats." data-en="Tell us when and where your event is and we'll prepare the tattoo experience for your guests together.">Explica'ns quan i on és el teu esdeveniment i preparem junts l'experiència de tatuatges pels teus convidats.</p>
+      <p class="cta-email">lauuink.tattoos@gmail.com</p>
+      <div class="cta-row">
+        <a href="mailto:lauuink.tattoos@gmail.com" class="btn solid" data-ca="Escriu-nos" data-en="Get in touch">Escriu-nos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="brand">@lauuink</span>
+  <span data-ca="Mini tattoos per a esdeveniments i bodes" data-en="Mini tattoos for events and weddings">Mini tattoos per a esdeveniments i bodes</span>
+  <span class="footer-email">lauuink.tattoos@gmail.com</span>
+</footer>
+
+<script>
+(function(){
+  var toggleBtn = document.getElementById('langToggle');
+  var htmlEl = document.documentElement;
+  var titleEl = document.querySelector('title');
+  var titles = {
+    ca: '@lauuink — Mini tattoos per a esdeveniments',
+    en: '@lauuink — Mini tattoos for events'
+  };
+  var current = 'ca';
+
+  function apply(lang){
+    document.querySelectorAll('[data-ca]').forEach(function(el){
+      var value = el.getAttribute(lang === 'en' ? 'data-en' : 'data-ca');
+      if (value === null) return;
+      if (el.tagName === 'IMG') {
+        el.setAttribute('alt', value);
+      } else {
+        el.textContent = value;
+      }
+    });
+    htmlEl.setAttribute('lang', lang);
+    if (titleEl) titleEl.textContent = titles[lang];
+    toggleBtn.innerHTML = lang === 'en'
+      ? '<span aria-hidden="true">🇪🇸</span> CA'
+      : '<span aria-hidden="true">🇬🇧</span> EN';
+    toggleBtn.setAttribute('aria-label', lang === 'en' ? 'Canvia a català' : 'Switch to English');
+    current = lang;
+  }
+
+  toggleBtn.addEventListener('click', function(){
+    apply(current === 'ca' ? 'en' : 'ca');
+  });
+})();
+</script>
+
+</body>
+</html>
