@@ -204,6 +204,22 @@
     text-transform:uppercase;
     color:var(--cream-2);
   }
+	
+	.location-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--cream-2);
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+  }
+  .location-badge svg {
+    width: 16px;
+    height: 16px;
+  }
   .hero-content .cta-row{
     margin-top:38px;
     display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
@@ -531,6 +547,16 @@
     <h1>Mini <span>tattoos</span></h1>
     <div class="subtitle" data-ca="per a esdeveniments" data-es="para eventos" data-en="for events">per a esdeveniments</div>
     <p class="tag" data-ca="Un record permanent per als teus convidats" data-es="Un recuerdo permanente para tus invitados" data-en="A permanent memory for your guests">Un record permanent per als teus convidats</p>
+    
+    <!-- NOU: Etiqueta d'ubicació amb icona -->
+    <div class="location-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      <span data-ca="Barcelona i voltants" data-es="Barcelona y alrededores" data-en="Barcelona and surroundings">Barcelona i voltants</span>
+    </div>
+
     <div class="cta-row">
       <a href="#contacte" class="btn" data-ca="Reserva la teva data" data-es="Reserva tu fecha" data-en="Book your date">Reserva la teva data</a>
       <a href="#proces" class="btn outline" data-ca="Com funciona" data-es="Cómo funciona" data-en="How it works">Com funciona</a>
