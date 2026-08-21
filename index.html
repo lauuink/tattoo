@@ -86,9 +86,16 @@
   }
   header nav{display:none;}
   @media(min-width:820px){ header nav{display:block;} }
-  .lang-toggle{
-    margin-left:28px;
+  
+  /* Selector d'idiomes */
+  .lang-dropdown {
+    position:relative;
     display:inline-block;
+    margin-left:28px;
+  }
+  .lang-toggle{
+    display:inline-flex;
+    align-items:center;
     background:transparent;
     border:1px solid rgba(255,255,255,0.6);
     color:var(--white);
@@ -102,7 +109,47 @@
     transition:background .2s ease, opacity .2s ease;
   }
   .lang-toggle:hover{background:rgba(255,255,255,0.15);}
-  .lang-toggle span{margin-right:4px;}
+  
+  .lang-flag {
+    width: 18px;
+    height: auto;
+    margin-right: 6px;
+    border-radius: 2px;
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: rgba(20, 14, 10, 0.9);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    min-width: 90px;
+  }
+  .lang-menu.show {
+    display: flex;
+  }
+  .lang-option {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--white);
+    border: none;
+    padding: 10px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lang-option:hover {
+    background: rgba(255,255,255,0.15);
+  }
 
   /* HERO */
   .hero{
@@ -451,53 +498,68 @@
   <div class="brand">@lauu<span>ink</span></div>
   <div style="display:flex; align-items:center;">
     <nav>
-      <a href="#que-es" data-ca="Què és" data-en="About">Què és</a>
-      <a href="#proces" data-ca="El procés" data-en="Process">El procés</a>
-      <a href="#moments" data-ca="Moments" data-en="Gallery">Moments</a>
-      <a href="#inclou" data-ca="Què inclou" data-en="What's included">Què inclou</a>
-      <a href="#contacte" data-ca="Contacte" data-en="Contact">Contacte</a>
+      <a href="#que-es" data-ca="Què és" data-es="Qué es" data-en="About">Què és</a>
+      <a href="#proces" data-ca="El procés" data-es="El proceso" data-en="Process">El procés</a>
+      <a href="#moments" data-ca="Moments" data-es="Momentos" data-en="Gallery">Moments</a>
+      <a href="#inclou" data-ca="Què inclou" data-es="Qué incluye" data-en="What's included">Què inclou</a>
+      <a href="#contacte" data-ca="Contacte" data-es="Contacto" data-en="Contact">Contacte</a>
     </nav>
-    <button type="button" id="langToggle" class="lang-toggle" aria-label="Switch to English"><span id="langFlag" aria-hidden="true">🇬🇧</span> EN</button>
+    <div class="lang-dropdown">
+      <button type="button" id="langToggle" class="lang-toggle" aria-label="Select language">
+        <img class="lang-flag" src="images/bandera-ca.png" alt="CA"> CA
+      </button>
+      <div class="lang-menu" id="langMenu">
+        <button type="button" class="lang-option" data-lang="ca">
+          <img class="lang-flag" src="images/bandera-ca.png" alt="CA"> CA
+        </button>
+        <button type="button" class="lang-option" data-lang="es">
+          <img class="lang-flag" src="images/bandera-es.png" alt="ES"> ES
+        </button>
+        <button type="button" class="lang-option" data-lang="en">
+          <img class="lang-flag" src="images/bandera-en.png" alt="EN"> EN
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <img src="images/hero-esdeveniment.jpg" data-ca="Tatuadora fent un mini tattoo durant un esdeveniment" data-en="Tattoo artist doing a mini tattoo during an event" alt="Tatuadora fent un mini tattoo durant un esdeveniment">
+  <img src="images/hero-esdeveniment.jpg" data-ca="Tatuadora fent un mini tattoo durant un esdeveniment" data-es="Tatuadora haciendo un mini tattoo durante un evento" data-en="Tattoo artist doing a mini tattoo during an event" alt="Tatuadora fent un mini tattoo durant un esdeveniment">
   <div class="hero-content">
     <div class="eyebrow">@lauuink</div>
     <h1>Mini <span>tattoos</span></h1>
-    <div class="subtitle" data-ca="per a esdeveniments" data-en="for events">per a esdeveniments</div>
-    <p class="tag" data-ca="Un record permanent dels teus convidats" data-en="A permanent memory for your guests">Un record permanent per als teus convidats</p>
+    <div class="subtitle" data-ca="per a esdeveniments" data-es="para eventos" data-en="for events">per a esdeveniments</div>
+    <p class="tag" data-ca="Un record permanent per als teus convidats" data-es="Un recuerdo permanente para tus invitados" data-en="A permanent memory for your guests">Un record permanent per als teus convidats</p>
     <div class="cta-row">
-      <a href="#contacte" class="btn" data-ca="Reserva la teva data" data-en="Book your date">Reserva la teva data</a>
-      <a href="#proces" class="btn outline" data-ca="Com funciona" data-en="How it works">Com funciona</a>
+      <a href="#contacte" class="btn" data-ca="Reserva la teva data" data-es="Reserva tu fecha" data-en="Book your date">Reserva la teva data</a>
+      <a href="#proces" class="btn outline" data-ca="Com funciona" data-es="Cómo funciona" data-en="How it works">Com funciona</a>
     </div>
   </div>
-  <div class="scroll-hint" data-ca="desplaça't ↓" data-en="scroll ↓">desplaça't ↓</div>
+  <div class="scroll-hint" data-ca="desplaça't ↓" data-es="desplázate ↓" data-en="scroll ↓">desplaça't ↓</div>
 </section>
 
 <!-- QUE ES -->
 <section class="intro" id="que-es">
   <div class="wrap intro-grid">
     <div class="intro-photo">
-      <img src="images/estudi-tatuatge.jpg" data-ca="Lauuink tatuant en directe durant una sessió" data-en="Lauuink tattooing live during a session" alt="Lauuink tatuant en directe durant una sessió">
+      <img src="images/estudi-tatuatge.jpg" data-ca="Lauuink tatuant en directe durant una sessió" data-es="Lauuink tatuando en directo durante una sesión" data-en="Lauuink tattooing live during a session" alt="Lauuink tatuant en directe durant una sessió">
       <div class="tag-chip">@lauuink</div>
     </div>
     <div class="intro-text">
-      <span class="serif-label" data-ca="En què consisteix" data-en="What it is">En què consisteix</span>
-      <h3 style="margin-top:10px;" data-ca="Un espai de tatuatges, fet a mida del teu esdeveniment" data-en="A tattoo space, tailored to your event">Un espai de tatuatges, fet a mida del teu esdeveniment</h3>
-      <p data-ca="Oferim un espai de tatuatges durant el teu esdeveniment on els convidats poden escollir un mini disseny i endur-se un record únic del gran dia." data-en="We offer a tattoo space during your event where guests can choose a mini design and take home a unique memory of the big day.">Oferim un espai de tatuatges durant el teu esdeveniment on els convidats poden escollir un mini disseny i endur-se un record únic del gran dia.</p>
+      <span class="serif-label" data-ca="En què consisteix" data-es="En qué consiste" data-en="What it is">En què consisteix</span>
+      <h3 style="margin-top:10px;" data-ca="Un espai de tatuatges, fet a mida del teu esdeveniment" data-es="Un espacio de tatuajes, hecho a medida de tu evento" data-en="A tattoo space, tailored to your event">Un espai de tatuatges, fet a mida del teu esdeveniment</h3>
+      <p data-ca="Oferim un espai de tatuatges durant el teu esdeveniment on els convidats poden escollir un mini disseny i endur-se un record únic del gran dia." data-es="Ofrecemos un espacio de tatuajes durante tu evento donde los invitados pueden elegir un mini diseño y llevarse un recuerdo único del gran día." data-en="We offer a tattoo space during your event where guests can choose a mini design and take home a unique memory of the big day.">Oferim un espai de tatuatges durant el teu esdeveniment on els convidats poden escollir un mini disseny i endur-se un record únic del gran dia.</p>
 
       <div class="feature-box">
-        <h4 data-ca="Com funciona?" data-en="How does it work?">Com funciona?</h4>
+        <h4 data-ca="Com funciona?" data-es="¿Cómo funciona?" data-en="How does it work?">Com funciona?</h4>
         <ul class="check-list">
-          <li data-ca="Catàleg de mini tattoos exclusius — es poden personalitzar amb els tatuatges que vulgueu." data-en="Exclusive catalogue of mini tattoos — can be customised with any designs you like.">Catàleg de mini tattoos exclusius — es poden personalitzar amb els tatuatges que vulgueu.</li>
-          <li data-ca="Tatuatges en negre i en vermell (es pot consultar si es vol algun altre color)." data-en="Tattoos in black and red (ask us if you'd like another colour).">Tatuatges en negre i en vermell (es pot consultar si es vol algun altre color).</li>
-          <li data-ca="Assistent durant tota la sessió." data-en="An assistant throughout the whole session.">Assistent durant tota la sessió.</li>
-          <li data-ca="Material estèril d'un sol ús." data-en="Single-use sterile material.">Material estèril d'un sol ús.</li>
-          <li data-ca="Zona preparada amb totes les mesures higièniques." data-en="A space set up with full hygiene standards.">Zona preparada amb totes les mesures higièniques.</li>
-          <li data-ca="Cura posterior explicada a cada convidat." data-en="Aftercare explained to every guest.">Cura posterior explicada a cada convidat.</li>
+          <li data-ca="Catàleg de mini tattoos exclusius — es poden personalitzar amb els tatuatges que vulgueu." data-es="Catálogo de mini tattoos exclusivos — se pueden personalizar con los tatuajes que queráis." data-en="Exclusive catalogue of mini tattoos — can be customised with any designs you like.">Catàleg de mini tattoos exclusius — es poden personalitzar amb els tatuatges que vulgueu.</li>
+          <li data-ca="Tatuatges en negre i en vermell (es pot consultar si es vol algun altre color)." data-es="Tatuajes en negro y en rojo (se puede consultar si se quiere algún otro color)." data-en="Tattoos in black and red (ask us if you'd like another colour).">Tatuatges en negre i en vermell (es pot consultar si es vol algun altre color).</li>
+          <li data-ca="Assistent durant tota la sessió." data-es="Asistente durante toda la sesión." data-en="An assistant throughout the whole session.">Assistent durant tota la sessió.</li>
+          <li data-ca="Material estèril d'un sol ús." data-es="Material estéril de un solo uso." data-en="Single-use sterile material.">Material estèril d'un sol ús.</li>
+          <li data-ca="Zona preparada amb totes les mesures higièniques." data-es="Zona preparada con todas las medidas higiénicas." data-en="A space set up with full hygiene standards.">Zona preparada amb totes les mesures higièniques.</li>
+          <li data-ca="Cura posterior explicada a cada convidat." data-es="Cuidado posterior explicado a cada invitado." data-en="Aftercare explained to every guest.">Cura posterior explicada a cada convidat.</li>
         </ul>
       </div>
     </div>
@@ -508,43 +570,43 @@
 <section class="proces" id="proces">
   <div class="wrap">
     <div class="section-head">
-      <span class="serif-label" data-ca="El procés" data-en="The process">El procés</span>
-      <h2 data-ca="Com funciona, pas a pas" data-en="How it works, step by step">Com funciona, pas a pas</h2>
+      <span class="serif-label" data-ca="El procés" data-es="El proceso" data-en="The process">El procés</span>
+      <h2 data-ca="Com funciona, pas a pas" data-es="Cómo funciona, paso a paso" data-en="How it works, step by step">Com funciona, pas a pas</h2>
     </div>
 
     <div class="proces-block">
       <div class="proces-block-head">
         <span class="proces-block-num">01</span>
         <div>
-          <h3 data-ca="Pels convidats" data-en="For guests">Pels convidats</h3>
+          <h3 data-ca="Pels convidats" data-es="Para los invitados" data-en="For guests">Pels convidats</h3>
         </div>
       </div>
       <div class="steps-row">
         <div class="step-card">
           <div class="step-img"><img src="images/pas1.png" alt="pas1"></div>
           <div class="step-num">1</div>
-          <h4 data-ca="Escull un disseny" data-en="Choose a design">Escull un disseny</h4>
+          <h4 data-ca="Escull un disseny" data-es="Elige un diseño" data-en="Choose a design">Escull un disseny</h4>
         </div>
         <div class="step-card">
           <div class="step-img"><img src="images/pas2.png" alt="pas2"></div>
           <div class="step-num">2</div>
-          <h4 data-ca="Signa el consentiment" data-en="Sign the consent form">Signa el consentiment</h4>
+          <h4 data-ca="Signa el consentiment" data-es="Firma el consentimiento" data-en="Sign the consent form">Signa el consentiment</h4>
         </div>
         <div class="step-card">
           <div class="step-img"><img src="images/pas3.png" alt="pas3"></div>
           <div class="step-num">3</div>
-          <h4 data-ca="Preparem l'stencil" data-en="We prepare the stencil">Preparem l'stencil</h4>
+          <h4 data-ca="Preparem l'stencil" data-es="Preparamos el stencil" data-en="We prepare the stencil">Preparem l'stencil</h4>
         </div>
         <div class="step-card">
           <div class="step-img"><img src="images/pas4.png" alt="pas4"></div>
           <div class="step-num">4</div>
-          <h4 data-ca="Fem el tatuatge" data-en="We do the tattoo">Fem el tatuatge</h4>
+          <h4 data-ca="Fem el tatuatge" data-es="Hacemos el tatuaje" data-en="We do the tattoo">Fem el tatuatge</h4>
         </div>
         <div class="step-card">
           <div class="step-img"><img src="images/pas5.png" alt="pas5"></div>
           <div class="step-num">5</div>
-          <h4 data-ca="T'expliquem la cura" data-en="We explain the aftercare">T'expliquem la cura</h4>
-          <p data-ca="Inclou un segon repàs si cal, un cop cicatritzat." data-en="Includes a touch-up if needed once healed.">Inclou un segon repàs si cal, un cop cicatritzat.</p>
+          <h4 data-ca="T'expliquem la cura" data-es="Te explicamos el cuidado" data-en="We explain the aftercare">T'expliquem la cura</h4>
+          <p data-ca="Inclou un segon repàs si cal, un cop cicatritzat." data-es="Incluye un segundo repaso si es necesario, una vez cicatrizado." data-en="Includes a touch-up if needed once healed.">Inclou un segon repàs si cal, un cop cicatritzat.</p>
         </div>
       </div>
     </div>
@@ -555,24 +617,24 @@
       <div class="proces-block-head">
         <span class="proces-block-num">02</span>
         <div>
-          <h3 data-ca="Per a qui organitza la sessió" data-en="For whoever is organising the session">Per a qui organitza la sessió</h3>
+          <h3 data-ca="Per a qui organitza la sessió" data-es="Para quien organiza la sesión" data-en="For whoever is organising the session">Per a qui organitza la sessió</h3>
         </div>
       </div>
       <div class="organiser-row">
         <div class="org-card">
           <span class="big-num">1</span>
-          <p data-ca="Escollir la durada de la sessió." data-en="Choose the length of the session.">Escollir la durada de la sessió.</p>
-          <p class="small" data-ca="Si durant l'esdeveniment és necessari, sempre hi haurà la possibilitat d'allargar-la 1 hora més." data-en="If needed during the event, there's always the option to extend it by 1 more hour.">Si durant l'esdeveniment és necessari, sempre hi haurà la possibilitat d'allargar-la 1 hora més.</p>
+          <p data-ca="Escollir la durada de la sessió." data-es="Elegir la duración de la sesión." data-en="Choose the length of the session.">Escollir la durada de la sessió.</p>
+          <p class="small" data-ca="Si durant l'esdeveniment és necessari, sempre hi haurà la possibilitat d'allargar-la 1 hora més." data-es="Si durante el evento es necesario, siempre habrá la posibilidad de alargarla 1 hora más." data-en="If needed during the event, there's always the option to extend it by 1 more hour.">Si durant l'esdeveniment és necessari, sempre hi haurà la possibilitat d'allargar-la 1 hora més.</p>
         </div>
         <div class="org-card">
           <span class="big-num">2</span>
-          <p data-ca="Revisar amb la tatuadora l'espai, la logística i les necessitats." data-en="Review the space, logistics and needs with the tattoo artist.">Revisar amb la tatuadora l'espai, la logística i les necessitats.</p>
-          <p class="small" data-ca="Per garantir que la sessió es pugui dur a terme en les millors condicions." data-en="To make sure the session runs in the best possible conditions.">Per garantir que la sessió es pugui dur a terme en les millors condicions.</p>
+          <p data-ca="Revisar amb la tatuadora l'espai, la logística i les necessitats." data-es="Revisar con la tatuadora el espacio, la logística y las necesidades." data-en="Review the space, logistics and needs with the tattoo artist.">Revisar amb la tatuadora l'espai, la logística i les necessitats.</p>
+          <p class="small" data-ca="Per garantir que la sessió es pugui dur a terme en les millors condicions." data-es="Para garantizar que la sesión se pueda llevar a cabo en las mejores condiciones." data-en="To make sure the session runs in the best possible conditions.">Per garantir que la sessió es pugui dur a terme en les millors condicions.</p>
         </div>
         <div class="org-card">
           <span class="big-num">3</span>
-          <p data-ca="Decidir si es volen incloure tatuatges personalitzats." data-en="Decide whether to include custom tattoos.">Decidir si es volen incloure tatuatges personalitzats.</p>
-          <p class="small" data-ca="Han de ser dissenys molt petits i senzills, per poder tatuar el màxim nombre de persones durant la sessió." data-en="They need to be very small, simple designs, so as many people as possible can be tattooed during the session.">Han de ser dissenys molt petits i senzills, per poder tatuar el màxim nombre de persones durant la sessió.</p>
+          <p data-ca="Decidir si es volen incloure tatuatges personalitzats." data-es="Decidir si se quieren incluir tatuajes personalizados." data-en="Decide whether to include custom tattoos.">Decidir si es volen incloure tatuatges personalitzats.</p>
+          <p class="small" data-ca="Han de ser dissenys molt petits i senzills, per poder tatuar el màxim nombre de persones durant la sessió." data-es="Deben ser diseños muy pequeños y sencillos, para poder tatuar al máximo número de personas durante la sesión." data-en="They need to be very small, simple designs, so as many people as possible can be tattooed during the session.">Han de ser dissenys molt petits i senzills, per poder tatuar el màxim nombre de persones durant la sessió.</p>
         </div>
       </div>
     </div>
@@ -583,28 +645,28 @@
 <section class="gallery" id="moments">
   <div class="wrap">
     <div class="section-head">
-      <span class="serif-label" data-ca="Moments reals" data-en="Real moments">Moments reals</span>
-      <h2 data-ca="Un record permanent perquè els teus convidats s'enduguin una experiència única." data-en="A permanent memory for your guests to take home a unique experience.">Un record permanent perquè els teus convidats s'enduguin una experiència única.</h2>
+      <span class="serif-label" data-ca="Moments reals" data-es="Momentos reales" data-en="Real moments">Moments reals</span>
+      <h2 data-ca="Un record permanent perquè els teus convidats s'enduguin una experiència única." data-es="Un recuerdo permanente para que tus invitados se lleven una experiencia única." data-en="A permanent memory for your guests to take home a unique experience.">Un record permanent perquè els teus convidats s'enduguin una experiència única.</h2>
     </div>
     <div class="gallery-grid">
-		<div class="sq"><img src="images/esdeveniment-1.jpg" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-		<div class="sq"><img src="images/esdeveniment-2.jpg" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-      <div class="sq"><img src="images/flor.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-      <div class="sq"><img src="images/psicopato.png" data-ca="Mini tattoo psicopato" data-en="Mini tattoo psicopato" alt="Mini tattoo psicopato"></div>
-      <div class="sq"><img src="images/cor.png" data-ca="Mini tattoo cor" data-en="Mini tattoo heart" alt="Mini tattoo cor"></div>
-      <div class="sq"><img src="images/sushi.png" data-ca="Mini tattoo sushi" data-en="Mini tattoo sushi" alt="Mini tattoo sushi"></div>
-      <div class="sq"><img src="images/ampolla.png" data-ca="Mini tattoo ampolla" data-en="Mini tattoo bottle" alt="Mini tattoo ampolla"></div>
-      <div class="sq"><img src="images/canell.png" data-ca="Mini tattoo canell" data-en="Mini tattoo wrist" alt="Mini tattoo canell"></div>
-      <div class="sq"><img src="images/amapola.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-      <div class="sq"><img src="images/far.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-		<div class="sq"><img src="images/cranc.png" data-ca="Mini tattoo ampolla" data-en="Mini tattoo bottle" alt="Mini tattoo ampolla"></div>
-      <div class="sq"><img src="images/maduixeta.png" data-ca="Mini tattoo canell" data-en="Mini tattoo wrist" alt="Mini tattoo canell"></div>
-      <div class="sq"><img src="images/flor bcn.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-      <div class="sq"><img src="images/floreta.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-		<div class="sq"><img src="images/onada.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-		<div class="sq"><img src="images/ART.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-		<div class="sq"><img src="images/sparkle.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
-		<div class="sq"><img src="images/arc.png" data-ca="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/esdeveniment-1.jpg" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/esdeveniment-2.jpg" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/flor.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/psicopato.png" data-ca="Mini tattoo psicopato" data-es="Mini tattoo psicopato" data-en="Mini tattoo psicopato" alt="Mini tattoo psicopato"></div>
+      <div class="sq"><img src="images/cor.png" data-ca="Mini tattoo cor" data-es="Mini tattoo corazón" data-en="Mini tattoo heart" alt="Mini tattoo cor"></div>
+      <div class="sq"><img src="images/sushi.png" data-ca="Mini tattoo sushi" data-es="Mini tattoo sushi" data-en="Mini tattoo sushi" alt="Mini tattoo sushi"></div>
+      <div class="sq"><img src="images/ampolla.png" data-ca="Mini tattoo ampolla" data-es="Mini tattoo botella" data-en="Mini tattoo bottle" alt="Mini tattoo ampolla"></div>
+      <div class="sq"><img src="images/canell.png" data-ca="Mini tattoo canell" data-es="Mini tattoo muñeca" data-en="Mini tattoo wrist" alt="Mini tattoo canell"></div>
+      <div class="sq"><img src="images/amapola.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/far.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/cranc.png" data-ca="Mini tattoo ampolla" data-es="Mini tattoo botella" data-en="Mini tattoo bottle" alt="Mini tattoo ampolla"></div>
+      <div class="sq"><img src="images/maduixeta.png" data-ca="Mini tattoo canell" data-es="Mini tattoo muñeca" data-en="Mini tattoo wrist" alt="Mini tattoo canell"></div>
+      <div class="sq"><img src="images/flor bcn.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/floreta.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/onada.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/ART.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/sparkle.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
+      <div class="sq"><img src="images/arc.png" data-ca="Mini tattoo flor" data-es="Mini tattoo flor" data-en="Mini tattoo flower" alt="Mini tattoo flor"></div>
     </div>
   </div>
 </section>
@@ -613,20 +675,20 @@
 <section class="inclou" id="inclou">
   <div class="wrap">
     <div class="section-head">
-      <span class="serif-label" data-ca="Què inclou" data-en="What's included">Què inclou</span>
-      <h2 data-ca="Tot pensat, tot resolt" data-en="Everything planned, everything sorted">Tot pensat, tot resolt</h2>
-      <p data-ca="Ens encarreguem de cada detall perquè només us hàgiu de preocupar de gaudir de l'esdeveniment." data-en="We take care of every detail so all you have to do is enjoy the event.">Ens encarreguem de cada detall perquè només us hàgiu de preocupar de gaudir de l'esdeveniment.</p>
+      <span class="serif-label" data-ca="Què inclou" data-es="Qué incluye" data-en="What's included">Què inclou</span>
+      <h2 data-ca="Tot pensat, tot resolt" data-es="Todo pensado, todo resuelto" data-en="Everything planned, everything sorted">Tot pensat, tot resolt</h2>
+      <p data-ca="Ens encarreguem de cada detall perquè només us hàgiu de preocupar de gaudir de l'esdeveniment." data-es="Nos encargamos de cada detalle para que solo os tengáis que preocupar de disfrutar del evento." data-en="We take care of every detail so all you have to do is enjoy the event.">Ens encarreguem de cada detall perquè només us hàgiu de preocupar de gaudir de l'esdeveniment.</p>
     </div>
     <div class="inclou-grid">
-      <div class="item"><span class="mark">✦</span><p data-ca="Tatuadora professional durant tota la sessió." data-en="A professional tattoo artist throughout the session.">Tatuadora professional durant tota la sessió.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Assistent per gestionar els consentiments, els stencils i l'organització de la cua." data-en="An assistant to manage consent forms, stencils and queue organisation.">Assistent per gestionar els consentiments, els stencils i l'organització de la cua.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Tot el material necessari per realitzar els tatuatges." data-en="All the material needed to do the tattoos.">Tot el material necessari per realitzar els tatuatges.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Material estèril i d'un sol ús." data-en="Sterile, single-use material.">Material estèril i d'un sol ús.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Muntatge i desmuntatge de l'espai de treball." data-en="Set-up and take-down of the work space.">Muntatge i desmuntatge de l'espai de treball.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Catàleg de mini tattoos per escollir." data-en="A catalogue of mini tattoos to choose from.">Catàleg de mini tattoos per escollir.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Possibilitat d'incloure alguns dissenys personalitzats (prèvia aprovació)." data-en="The option to include some custom designs (subject to prior approval).">Possibilitat d'incloure alguns dissenys personalitzats (prèvia aprovació).</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Segon repàs inclòs si és necessari un cop cicatritzat el tatuatge." data-en="A follow-up touch-up included if needed once the tattoo has healed.">Segon repàs inclòs si és necessari un cop cicatritzat el tatuatge.</p></div>
-      <div class="item"><span class="mark">✦</span><p data-ca="Assessorament previ per planificar l'espai i el funcionament del servei." data-en="Prior guidance to plan the space and how the service will run.">Assessorament previ per planificar l'espai i el funcionament del servei.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Tatuadora professional durant tota la sessió." data-es="Tatuadora profesional durante toda la sesión." data-en="A professional tattoo artist throughout the session.">Tatuadora professional durant tota la sessió.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Assistent per gestionar els consentiments, els stencils i l'organització de la cua." data-es="Asistente para gestionar los consentimientos, los stencils y la organización de la cola." data-en="An assistant to manage consent forms, stencils and queue organisation.">Assistent per gestionar els consentiments, els stencils i l'organització de la cua.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Tot el material necessari per realitzar els tatuatges." data-es="Todo el material necesario para realizar los tatuajes." data-en="All the material needed to do the tattoos.">Tot el material necessari per realitzar els tatuatges.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Material estèril i d'un sol ús." data-es="Material estéril y de un solo uso." data-en="Sterile, single-use material.">Material estèril i d'un sol ús.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Muntatge i desmuntatge de l'espai de treball." data-es="Montaje y desmontaje del espacio de trabajo." data-en="Set-up and take-down of the work space.">Muntatge i desmuntatge de l'espai de treball.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Catàleg de mini tattoos per escollir." data-es="Catálogo de mini tattoos para elegir." data-en="A catalogue of mini tattoos to choose from.">Catàleg de mini tattoos per escollir.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Possibilitat d'incloure alguns dissenys personalitzats (prèvia aprovació)." data-es="Posibilidad de incluir algunos diseños personalizados (previa aprobación)." data-en="The option to include some custom designs (subject to prior approval).">Possibilitat d'incloure alguns dissenys personalitzats (prèvia aprovació).</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Segon repàs inclòs si és necessari un cop cicatritzat el tatuatge." data-es="Segundo repaso incluido si es necesario una vez cicatrizado el tatuaje." data-en="A follow-up touch-up included if needed once the tattoo has healed.">Segon repàs inclòs si és necessari un cop cicatritzat el tatuatge.</p></div>
+      <div class="item"><span class="mark">✦</span><p data-ca="Assessorament previ per planificar l'espai i el funcionament del servei." data-es="Asesoramiento previo para planificar el espacio y el funcionamiento del servicio." data-en="Prior guidance to plan the space and how the service will run.">Assessorament previ per planificar l'espai i el funcionament del servei.</p></div>
     </div>
   </div>
 </section>
@@ -637,11 +699,11 @@
   <div class="wrap">
     <div class="cta-final-inner">
       <span class="serif-label">@lauuink</span>
-      <h2 data-ca="Fem que el teu dia es recordi per sempre" data-en="Let's make your day unforgettable">Fem que el teu dia es recordi per sempre</h2>
-      <p data-ca="Explica'ns quan i on és el teu esdeveniment i preparem junts l'experiència de tatuatges pels teus convidats." data-en="Tell us when and where your event is and we'll prepare the tattoo experience for your guests together.">Explica'ns quan i on és el teu esdeveniment i preparem junts l'experiència de tatuatges pels teus convidats.</p>
+      <h2 data-ca="Fem que el teu dia es recordi per sempre" data-es="Hagamos que tu día se recuerde para siempre" data-en="Let's make your day unforgettable">Fem que el teu dia es recordi per sempre</h2>
+      <p data-ca="Explica'ns quan i on és el teu esdeveniment i preparem junts l'experiència de tatuatges pels teus convidats." data-es="Explícanos cuándo y dónde es tu evento y preparamos juntos la experiencia de tatuajes para tus invitados." data-en="Tell us when and where your event is and we'll prepare the tattoo experience for your guests together.">Explica'ns quan i on és el teu esdeveniment i preparem junts l'experiència de tatuatges pels teus convidats.</p>
       <p class="cta-email">lauuink.tattoos@gmail.com</p>
       <div class="cta-row">
-        <a href="mailto:lauuink.tattoos@gmail.com" class="btn solid" data-ca="Escriu-nos" data-en="Get in touch">Escriu-nos</a>
+        <a href="mailto:lauuink.tattoos@gmail.com" class="btn solid" data-ca="Escriu-nos" data-es="Escríbenos" data-en="Get in touch">Escriu-nos</a>
       </div>
     </div>
   </div>
@@ -649,24 +711,39 @@
 
 <footer>
   <span class="brand">@lauuink</span>
-  <span data-ca="Mini tattoos per a esdeveniments i bodes" data-en="Mini tattoos for events and weddings">Mini tattoos per a esdeveniments i bodes</span>
+  <span data-ca="Mini tattoos per a esdeveniments i bodes" data-es="Mini tattoos para eventos y bodas" data-en="Mini tattoos for events and weddings">Mini tattoos per a esdeveniments i bodes</span>
   <span class="footer-email">lauuink.tattoos@gmail.com</span>
 </footer>
 
 <script>
 (function(){
   var toggleBtn = document.getElementById('langToggle');
+  var langMenu = document.getElementById('langMenu');
   var htmlEl = document.documentElement;
   var titleEl = document.querySelector('title');
   var titles = {
     ca: '@lauuink — Mini tattoos per a esdeveniments',
+    es: '@lauuink — Mini tattoos para eventos',
     en: '@lauuink — Mini tattoos for events'
+  };
+  
+  // Rutes de les imatges de les banderes
+  var flags = {
+    ca: 'images/bandera-ca.png',
+    es: 'images/bandera-es.png',
+    en: 'images/bandera-en.png'
+  };
+  
+  var labels = {
+    ca: 'CA',
+    es: 'ES',
+    en: 'EN'
   };
   var current = 'ca';
 
   function apply(lang){
     document.querySelectorAll('[data-ca]').forEach(function(el){
-      var value = el.getAttribute(lang === 'en' ? 'data-en' : 'data-ca');
+      var value = el.getAttribute('data-' + lang);
       if (value === null) return;
       if (el.tagName === 'IMG') {
         el.setAttribute('alt', value);
@@ -676,15 +753,26 @@
     });
     htmlEl.setAttribute('lang', lang);
     if (titleEl) titleEl.textContent = titles[lang];
-    toggleBtn.innerHTML = lang === 'en'
-      ? '<span aria-hidden="true">🇪🇸</span> CA'
-      : '<span aria-hidden="true">🇬🇧</span> EN';
-    toggleBtn.setAttribute('aria-label', lang === 'en' ? 'Canvia a català' : 'Switch to English');
+    
+    // Actualitza el contingut del botó principal amb la imatge de la bandera
+    toggleBtn.innerHTML = '<img class="lang-flag" src="' + flags[lang] + '" alt="' + labels[lang] + '"> ' + labels[lang];
     current = lang;
   }
 
-  toggleBtn.addEventListener('click', function(){
-    apply(current === 'ca' ? 'en' : 'ca');
+  toggleBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    langMenu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function(){
+    langMenu.classList.remove('show');
+  });
+
+  document.querySelectorAll('.lang-option').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var selectedLang = this.getAttribute('data-lang');
+      apply(selectedLang);
+    });
   });
 })();
 </script>
